@@ -1,0 +1,27 @@
+{
+  "type": "page",
+  "body": [
+    {
+      "type": "flex",
+      "direction": "column",
+      "alignItems": "center",
+      "className": "h-full",
+      "items": [
+        {
+          "type": "image",
+          "enlargeAble": true,
+          "showToolbar": true,
+          "src": "${image === undefined ? '' : host + '/download?file=' + image}"
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "input-file",
+          "name": "image",
+          "receiver": "${host}/upload"
+        }
+      ]
+    }
+  ]
+}

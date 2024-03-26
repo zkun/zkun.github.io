@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta content="width=device-width, user-scalable=no initial-scale=1.0, minimum-scale=1.0" name="viewport"/>
+    <style>
+        html {
+			box-sizing: border-box;
+        }
+
+        * {
+			font-size: 1rem;
+			box-sizing: inherit;
+			font-family: inherit;
+		}
+
+        html, body {
+            height: 100%;
+			margin: 0;
+			padding: 0;
+        }
+
+        body {
+            color: #242424;
+            background-color: white;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica, "helvetica neue", ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+            letter-spacing: -0.0015em;
+            line-height: 1.45;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			text-align: center;
+			min-height: 100%;
+        }
+
+		input, button {
+			width: 100%;
+			appearance: none;
+			border-radius: 0.25rem;
+			padding: 0.5rem 0.75rem 0.5rem;
+
+			font-weight: 500;
+			border-color: rgba(0, 0, 0, 0.05);
+		}
+
+		input {
+			margin-top: 0.42rem;
+			line-height: inherit;
+
+			background-color: #f6f4f2;
+		}
+
+        button {
+			margin-top: 0.65rem;
+
+			cursor: pointer;
+			display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            line-height: 1.7;
+            color: white;
+			background-color: #474645;
+            transition: background-color 100ms ease, color 100ms ease;
+        }
+
+        button.button-sso svg {
+            margin-right: 0.75rem;
+        }
+
+        button.button-sso {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            color: #242424;
+            border: 1px solid #d8d6d4;
+            transition-property: color, border-color, background-color, box-shadow;
+            transition-duration: 200ms;
+            transition-timing-function: ease;
+        }
+
+        form {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 20rem;
+            width: 94%;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <form method="post" action="https://api.zkun.eu.org/auth/login">
+		<label>
+			<input required autofocus name="email" placeholder="邮箱" type="email">
+			<input required name="password" placeholder="请输入密码" type="password">
+		</label>
+
+		<button type="submit">登录</button>
+    </form>
+
+    <div class="divider">or</div>
+
+	<form action="https://api.zkun.eu.org/auth/wechat">
+        <button class="button-sso" type="submit">
+			<input name="redirect_uri" type="hidden" id="redirect">
+			<svg fill="none" height="17" viewBox="0 0 16 16" width="17" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H7.57886V7.57886H0V0Z" fill="#F25022"/>
+                <path d="M0 8.42114H7.57886V16H0V8.42114Z" fill="#00A4EF"/>
+                <path d="M8.42114 0H16V7.57886H8.42114V0Z" fill="#7FBA00"/>
+                <path d="M8.42114 8.42114H16V16H8.42114V8.42114Z" fill="#FFB900"/>
+            </svg>
+            Sign in with WeChat
+        </button>
+    </form>
+</main>
+<script>
+	let params = new URLSearchParams(window.location.search);
+	document.getElementById("redirect").value = params.get("redirect_uri");
+</script>
+</body>
+</html>
+

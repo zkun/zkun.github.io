@@ -1,0 +1,152 @@
+{
+  "status": 0,
+  "data": {
+    "type": "page",
+    "name": "user",
+    "initApi": "https://api.zkun.eu.org/auth/info",
+    "interval": 4200,
+    "silentPolling": true,
+    "stopAutoRefreshWhen": "${state === 1}",
+    "onEvent": {
+      "inited": {
+        "actions": [
+          {
+            "componentId": "root",
+            "actionType": "setValue",
+            "dataMergeMode": "override",
+            "args": {
+              "value": {
+                "group": "${SPLIT(groups, ',')}"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "body": [
+      {
+        "type": "property",
+        "title": "用户信息",
+        "column": 2,
+        "visibleOn": "${state === 1}",
+        "items": [
+          {
+            "label": {
+              "type": "avatar",
+              "src": "${avatar}"
+            },
+            "content": "${name}"
+          },
+          {
+            "label": "权限组",
+            "content": "${groups}"
+          },
+          {
+            "label": "邮箱",
+            "content": "${mail}"
+          },
+          {
+            "label": "密码",
+            "content": {
+              "label": "修改密码",
+              "type": "button",
+              "actionType": "dialog",
+              "reload": "user",
+              "dialog": {
+                "title": "修改邮箱、密码",
+                "body": {
+                  "type": "form",
+                  "api": "https://api.zkun.eu.org/auth/info",
+                  "body": [
+                    {
+                      "type": "input-email",
+                      "name": "mail",
+                      "label": "邮箱",
+                      "required": true
+                    },
+                    {
+                      "type": "input-password",
+                      "name": "password",
+                      "label": "密码",
+                      "required": true
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "flex",
+        "direction": "column",
+        "alignItems": "center",
+        "className": "h-full",
+        "visibleOn": "${state === 0}",
+        "items": [
+          {
+            "type": "wrapper",
+            "className": "w-1/3 m:w-full",
+            "body": [
+              {
+                "type": "switch",
+                "name": "wechat",
+                "onText": "密码登录",
+                "offText": "微信登录",
+                "value": false
+              },
+              {
+                "type": "form",
+                "title": "用户登录",
+                "submitText": "登录",
+                "mode": "horizontal",
+                "hiddenOn": "${wechat}",
+                "api": "https://api.zkun.eu.org/user/login",
+                "horizontal": {
+                  "justify": true
+                },
+                "body": [
+                  {
+                    "type": "input-email",
+                    "name": "mail",
+                    "label": "邮箱:"
+                  },
+                  {
+                    "type": "input-password",
+                    "name": "password",
+                    "label": "密码:"
+                  }
+                ],
+                "actions": [
+                  {
+                    "type": "submit",
+                    "label": "登录",
+                    "primary": true
+                  }
+                ]
+              },
+              {
+                "type": "flex",
+                "direction": "column",
+                "alignItems": "center",
+                "visibleOn": "${wechat}",
+                "items": [
+                  {
+                    "type": "qrcode",
+                    "codeSize": 256,
+                    "value": "${wechat_url}"
+                  },
+                  {
+                    "type": "submit",
+                    "label": "登录",
+                    "primary": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

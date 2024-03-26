@@ -1,0 +1,61 @@
+{
+  "status": 0,
+  "data": {
+    "type": "page",
+    "name": "wechat",
+    "initApi": "https://api.zkun.eu.org/wechat/info",
+    "interval": 3000,
+    "silentPolling": true,
+    "stopAutoRefreshWhen": "${state !== 1}",
+    "body": [
+      {
+        "type": "flex",
+        "direction": "column",
+        "alignItems": "center",
+        "className": "h-full",
+        "visibleOn": "${state !== 0}",
+        "items": [
+          {
+            "type": "image",
+            "imageMode": "original",
+            "title": "使用手机微信扫码登录",
+            "value": "https://login.weixin.qq.com/qrcode/${uuid}",
+            "visibleOn": "${state === 1}"
+          },
+          {
+            "type": "button",
+            "label": "启动服务",
+            "level": "primary",
+            "reload": "wechat",
+            "actionType": "ajax",
+            "visibleOn": "${state === 2}",
+            "api": "put:https://api.zkun.eu.org/wechat/info"
+          }
+        ]
+      },
+      {
+        "type": "property",
+        "title": "微信信息",
+        "column": 2,
+        "visibleOn": "${state === 0}",
+        "items": [
+          {
+            "label": {
+              "type": "avatar",
+              "src": "${avatar}"
+            },
+            "content": "${name}"
+          },
+          {
+            "label": "uuid",
+            "content": "${uuid}"
+          },
+          {
+            "label": "状态",
+            "content": "${state}"
+          }
+        ]
+      }
+    ]
+  }
+}
