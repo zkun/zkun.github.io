@@ -1,0 +1,81 @@
+{
+  "status": 0,
+  "data": {
+      "type": "page",
+      "body": [
+          {
+              "type": "flex",
+              "justify": "flex-end",
+              "className": "w-full",
+              "items": [
+                  {
+                      "label": "新增",
+                      "type": "button",
+                      "className": "pull-right",
+                      "actionType": "dialog",
+                      "level": "primary",
+                      "className": "m-b-sm",
+                      "dialog": {
+                        "title": "添加设备",
+                        "body": {
+                          "type": "form",
+                          "api": "/api/devices",
+                          "reload": "service",
+                          "body": [
+                            {
+                                "type": "input-text",
+                                "name": "name",
+                                "label": "名称"
+                            },
+                            {
+                                "type": "input-text",
+                                "name": "code",
+                                "label": "编号"
+                            }
+                          ]
+                        }
+                      }
+                  }
+              ]
+          },
+          {
+              "id": "service",
+              "type": "service",
+              "api": "/api/devices",
+              "body": {
+                  "type": "table",
+                  "source": "$items",
+                  "columnsTogglable": false,
+                  "itemActions": [
+                      {
+                          "label": "删除",
+                          "type": "button",
+                          "reload": "service",
+                          "actionType": "ajax",
+                          "confirmText": "确认要删除？",
+                          "api": "delete:/api/devices?code=$code"
+                      }
+                  ],
+                  "columns": [
+                    {
+                      "name": "code",
+                      "label": "编号"
+                    },
+                    {
+                      "name": "name",
+                      "label": "名称"
+                    },
+                    {
+                      "name": "address",
+                      "label": "IP"
+                    },
+                    {
+                      "name": "port",
+                      "label": "端口"
+                    }
+                  ]
+              }
+          }
+      ]
+  }
+}

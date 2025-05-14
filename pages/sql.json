@@ -1,0 +1,14 @@
+{
+  "type": "page",
+  "body": {
+      "type": "form",
+      "title": "数据库指令",
+      "mode": "horizontal",
+      "api": "https://api.zkun.eu.org/table",
+      "body": {
+        "name": "query",
+        "label": "指令",
+        "type": "input-text"
+      }
+    }  
+}

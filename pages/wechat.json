@@ -1,0 +1,65 @@
+{
+  "status": 0,
+  "data": {
+    "type": "page",
+    "name": "wechat",
+    "initApi": "/api/wechat",
+    "interval": 3000,
+    "silentPolling": true,
+    "stopAutoRefreshWhen": "${state === 3}",
+    "body": [
+      {
+        "type": "flex",
+        "direction": "column",
+        "alignItems": "center",
+        "className": "h-full",
+        "hiddenOn": "${state === 3}",
+        "items": [
+          {
+            "type": "qr-code",
+            "codeSize": 256,
+            "value": "https://login.weixin.qq.com/l/${uuid}",
+            "visibleOn": "${AND(uuid !== '', state === 2)}"
+          },
+          {
+            "type": "tpl",
+            "tpl": "使用手机微信扫码登录",
+            "visibleOn": "${state === 2}"
+          },
+          {
+            "type": "button",
+            "label": "启动服务",
+            "level": "primary",
+            "reload": "wechat",
+            "actionType": "ajax",
+            "visibleOn": "${state === 0}",
+            "api": "put:/api/wechat"
+          }
+        ]
+      },
+      {
+        "type": "property",
+        "title": "微信信息",
+        "column": 2,
+        "visibleOn": "${state === 3}",
+        "items": [
+          {
+            "label": {
+              "type": "avatar",
+              "src": "${avatar}"
+            },
+            "content": "${name}"
+          },
+          {
+            "label": "uuid",
+            "content": "${uuid}"
+          },
+          {
+            "label": "状态",
+            "content": "${state}"
+          }
+        ]
+      }
+    ]
+  }
+}

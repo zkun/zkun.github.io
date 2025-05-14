@@ -1,0 +1,63 @@
+{
+  "status": 0,
+  "data": {
+    "pages": [
+      {
+        "label": "Home",
+        "url": "/",
+        "redirect": "user"
+      },
+      {
+        "label": "通用模块",
+        "children": [
+          {
+            "url": "wechat",
+            "label": "微信机器人",
+            "icon": "fa fa-wechat",
+            "schemaApi": "/pages/wechat.json"
+          },
+          {
+            "url": "color",
+            "label": "色块识别",
+            "icon": "fa fa-palette",
+            "schemaApi": "/pages/color.json"
+          },
+          {
+            "url": "camera",
+            "label": "监控",
+            "icon": "fa fa-palette",
+            "schemaApi": "/pages/camera.json"
+          },
+          {
+            "url": "ship",
+            "label": "无人船",
+            "icon": "fa fa-ship",
+            "schemaApi": "/pages/ship.json"
+          },
+          {
+            "url": "goods",
+            "label": "商品管理",
+            "icon": "fa fa-basket-shopping",
+            "schemaApi": "/pages/goods.json"
+          }
+        ]
+      },
+      {
+        "label": "用户",
+        "children": [
+          {
+            "url": "login",
+            "label": "登录账号",
+            "icon": "fa fa-user",
+            "redirect": "https://api.zkun.eu.org/oidc/auth"
+          },
+          {
+            "url": "sql",
+            "visibleOn": "false",
+            "schemaApi": "/pages/sql.json"
+          }
+        ]
+      }
+    ]
+  }
+}

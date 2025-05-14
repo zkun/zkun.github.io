@@ -1,0 +1,92 @@
+{
+  "id": "user",
+  "type": "page",
+  "initApi": "/api/profile",
+  "onEvent": {
+    "inited": {
+      "actions": [
+        {
+          "actionType": "url",
+          "expression": "${event.data.responseStatus == 401}",
+          "args": {
+            "url": "/login",
+            "blank": false,
+            "params": {
+              "name": "jack"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "body": [
+    {
+      "type": "service",
+      "interval": 1300,
+      "silentPolling": true,
+      "visibleOn": "${uuid}",
+      "api": "/api/login?uuid=${uuid}",
+      "onEvent": {
+        "fetchInited": {
+          "actions": [
+            {
+              "actionType": "refresh",
+              "expression": "${event.data.responseData.sub}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "flex",
+      "className": "h-full",
+      "visibleOn": "${uuid}",
+      "direction": "column",
+      "alignItems": "center",
+      "items": {
+        "type": "image",
+        "src": "/api/qrcode?uuid=${uuid}"
+      }
+    },
+    {
+      "type": "form",
+      "static": true,
+      "labelAlign": "left",
+      "mode": "horizontal",
+      "title": "用户信息",
+      "visibleOn": "${sub}",
+      "actions": [
+        {
+          "label": "退出",
+          "type": "action",
+          "level": "danger",
+          "actionType": "ajax",
+          "api": "delete:/api/user",
+          "reload": "window"
+        }
+      ],
+      "body": [
+        {
+          "type": "input-text",
+          "name": "sub",
+          "label": "ID"
+        },
+        {
+          "type": "input-text",
+          "name": "name",
+          "label": "昵称"
+        },
+        {
+          "type": "input-text",
+          "name": "roles",
+          "label": "权限"
+        },
+        {
+          "type": "input-text",
+          "name": "phone",
+          "label": "手机"
+        }
+      ]
+    }
+  ]
+}

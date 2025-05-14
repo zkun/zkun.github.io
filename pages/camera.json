@@ -1,0 +1,38 @@
+{
+  "status": 0,
+  "data": {
+    "type": "page",
+    "debug": true,
+    "aside": {
+      "type": "input-tree",
+      "name": "tree",
+      "joinValues": false,
+      "source": "/api/camera"
+    },
+    "body": [
+      {
+        "type": "property",
+        "title": "设备信息",
+        "column": 2,
+        "items": [
+          {
+            "label": "设备名",
+            "content": "${tree.label}"
+          },
+          {
+            "label": "编号",
+            "content": "${tree.value}"
+          },
+          {
+            "label": "IP",
+            "content": "${tree.address}"
+          },
+          {
+            "label": "状态",
+            "content": "${tree.state}"
+          }
+        ]
+      }
+    ]
+  }
+}

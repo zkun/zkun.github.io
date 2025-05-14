@@ -1,0 +1,8 @@
+{
+    "type": "page",
+    "body": {
+        "type": "log",
+        "source": "https://www.zkun.eu.org/api/log",
+        "className": "h-full"
+    }
+}

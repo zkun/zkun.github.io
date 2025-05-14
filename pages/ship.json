@@ -1,0 +1,49 @@
+{
+  "type": "page",
+  "body": {
+    "type": "crud",
+    "api": "https://api.zkun.eu.org/ship",
+    "quickSaveItemApi": "https://api.zkun.eu.org/ship",
+    "columnsTogglable": false,
+    "headerToolbar": [
+      "reload",
+      {
+        "label": "添加",
+        "align": "right",
+        "level": "success",
+        "type": "button",
+        "icon": "fa fa-plus",
+        "actionType": "ajax",
+        "api": "put:https://api.zkun.eu.org/ship"
+      }
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "label": "设备编号"
+      },
+      {
+        "name": "openid",
+        "label": "用户编号",
+        "quickEdit": true
+      },
+      {
+        "name": "name",
+        "label": "设备名称",
+        "quickEdit": {
+          "saveImmediately": true
+        }
+      },
+      {
+        "name": "phone",
+        "label": "北斗编号",
+        "quickEdit": true
+      },
+      {
+        "name": "imei",
+        "label": "移动设备识别码",
+        "quickEdit": true
+      }      
+    ]
+  }
+}

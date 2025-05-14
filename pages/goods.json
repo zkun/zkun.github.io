@@ -1,0 +1,30 @@
+{
+  "type": "page",
+  "body": {
+    "type": "crud",
+    "api": "https://api.zkun.eu.org/goods",
+    "columnsTogglable": false,
+    "columns": [
+      {
+        "name": "code",
+        "label": "条码"
+      },
+      {
+        "name": "name",
+        "label": "名称"
+      },
+      {
+        "name": "size",
+        "label": "规格"
+      },
+      {
+        "name": "desc",
+        "label": "备注"
+      },
+      {
+        "name": "price",
+        "label": "价格"
+      }
+    ]
+  }
+}
